@@ -1,0 +1,96 @@
+{% extends 'main.html' %} {% block content %}
+
+<style>
+  /* * {
+    background-color: #e7f6f2;
+  }
+
+  .main-button {
+    color: #1cc49d;
+    background-color: #1b2f31;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1.5em;
+    width: 4em;
+    font-size: large;
+    font-weight: 600;
+    margin-right: 5px;
+  }
+
+  h1 {
+    color: #2c3333;
+  }
+
+  p {
+    color: #2c3333;
+  }
+
+  a {
+    text-decoration: none;
+    color: #395b64;
+    font-size: 1.4rem;
+  } */
+  .home-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+  /* .button-container {
+    display: flex;
+  }
+  input {
+    appearance: none;
+    width: 30rem;
+    background-color: white;
+    padding: 0.5rem 1.6rem;
+    border-radius: var(--rad);
+    font-size: 1.8rem;
+    border: 0;
+    border-radius: 5px;
+    margin-right: 400px;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  } */
+</style>
+
+<div class="home-container">
+  <div>
+    <h3>browse topics</h3>
+    <hr />
+
+    <div>
+      <a href="{% url 'home' %}">ALL</a>
+    </div>
+
+    {% for topic in topics %}
+    <div>
+      <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div>
+    <h5>{{room_count}} rooms available</h5>
+    <a href="{% url 'create-room' %}">create room</a>
+    {% for room in rooms %}
+    <div>
+      <div class="button-container">
+        <a href="{% url 'update-room' room.id %}" class="main-button">Edit</a>
+        <a href="{% url 'delete-room' room.id %}" class="main-button">Delete</a>
+      </div>
+      <span>@{{room.host.username}}</span>
+      <h5>
+        <a href="{% url 'room' room.id %}">{{room.name}}</a>
+      </h5>
+      <small>{{room.topic.name}}</small>
+      <hr />
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}
