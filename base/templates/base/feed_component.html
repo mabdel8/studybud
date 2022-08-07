@@ -1,0 +1,19 @@
+
+<div class="feed-container">
+  {% for room in rooms %}
+  <div class='room-container'>
+    <div class="button-container">
+      {% if request.user == room.host%}
+      <a href="{% url 'update-room' room.id %}" class="main-button">Edit</a>
+      <a href="{% url 'delete-room' room.id %}" class="main-button">Delete</a>
+      {% endif %}
+    </div>
+    <a id='room-host' href="{% url 'user-profile' room.host.id %}">@{{room.host.username}}</a>
+    <h5>
+      <a id='feed-room-body' href="{% url 'room' room.id %}">{{room.name}}</a>
+    </h5>
+    <small id='topic-container'><small id='topic-name'>{{room.topic.name}}</small></small>
+    
+  </div>
+  {% endfor %}
+</div>
