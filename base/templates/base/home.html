@@ -79,8 +79,10 @@
     {% for room in rooms %}
     <div>
       <div class="button-container">
+        {% if request.user == room.host%}
         <a href="{% url 'update-room' room.id %}" class="main-button">Edit</a>
         <a href="{% url 'delete-room' room.id %}" class="main-button">Delete</a>
+        {% endif %}
       </div>
       <span>@{{room.host.username}}</span>
       <h5>
